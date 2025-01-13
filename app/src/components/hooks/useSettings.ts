@@ -12,6 +12,8 @@ const useSettings = () => {
     ease: "easeInOut",
   });
 
+  console.log(easeFns);
+
   const easeFnsList = useMemo(
     () => Object.keys(easeFns) as (keyof typeof easeFns)[],
     []
