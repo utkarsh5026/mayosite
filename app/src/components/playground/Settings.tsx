@@ -9,8 +9,9 @@ import {
   SelectGroup,
   SelectLabel,
 } from "@/components/ui/select";
-import useSettings from "../hooks/useSettings";
+
 import { EaseFnName } from "mayonation";
+import useSettings from "@/store/settings/hook";
 
 const AnimationSettings: React.FC = () => {
   const { settings, handleSettingsChange, easeFnsList } = useSettings();
@@ -37,6 +38,7 @@ const AnimationSettings: React.FC = () => {
               step={100}
               value={[settings.duration]}
               onValueChange={(value) => {
+                console.log("changing duration", value);
                 handleSettingsChange({
                   ...settings,
                   duration: value[0],
@@ -60,6 +62,7 @@ const AnimationSettings: React.FC = () => {
           <Select
             value={settings.ease ?? "easeInOut"}
             onValueChange={(value: EaseFnName) => {
+              console.log("changing ease", value);
               handleSettingsChange({
                 ...settings,
                 ease: value,

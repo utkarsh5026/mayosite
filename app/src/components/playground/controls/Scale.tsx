@@ -2,7 +2,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import React, { useState } from "react";
 import BaseControlCard from "./BaseControlCard";
-import useAnimationPlayground from "@/components/hooks/useAnimationPlayground";
+import useAnimationPlayground from "@/store/playground/hook";
 
 const Scale: React.FC = () => {
   const { handleAnimationConfigChange } = useAnimationPlayground();

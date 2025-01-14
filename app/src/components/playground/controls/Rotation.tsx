@@ -2,7 +2,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import React, { useState } from "react";
 import BaseControlCard from "./BaseControlCard";
-import useAnimationPlayground from "@/components/hooks/useAnimationPlayground";
+import useAnimationPlayground from "@/store/playground/hook";
 
 const Rotation: React.FC = () => {
   const { handleAnimationConfigChange } = useAnimationPlayground();
@@ -24,7 +24,11 @@ const Rotation: React.FC = () => {
               checked={enableX}
               onCheckedChange={(checked: boolean) => {
                 setEnableX(checked);
-                handleAnimationConfigChange("rotateX", rotateX);
+                if (checked) {
+                  handleAnimationConfigChange("rotateX", rotateX);
+                } else {
+                  handleAnimationConfigChange("rotateX", undefined);
+                }
               }}
               className="border-gray-300 dark:border-gray-700"
             />

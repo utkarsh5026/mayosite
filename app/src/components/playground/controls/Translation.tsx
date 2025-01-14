@@ -2,7 +2,7 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { Slider } from "@/components/ui/slider";
 import React, { useState } from "react";
 import BaseControlCard from "./BaseControlCard";
-import useAnimationPlayground from "@/components/hooks/useAnimationPlayground";
+import useAnimationPlayground from "@/store/playground/hook";
 
 const Translation: React.FC = () => {
   const { handleAnimationConfigChange } = useAnimationPlayground();
@@ -23,8 +23,11 @@ const Translation: React.FC = () => {
               checked={enableX}
               onCheckedChange={(checked: boolean) => {
                 setEnableX(checked);
-                if (enableX)
+                if (checked) {
                   handleAnimationConfigChange("translateX", translateX);
+                } else {
+                  handleAnimationConfigChange("translateX", undefined);
+                }
               }}
               className="border-gray-300 dark:border-gray-700"
             />
