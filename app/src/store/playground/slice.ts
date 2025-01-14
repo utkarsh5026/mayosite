@@ -28,7 +28,7 @@ export const animationSlice = createSlice({
       if (value === undefined) {
         delete state.config[key];
       } else {
-        state.config[key] = value;
+        state.config[key] = value as any;
       }
     },
     setLoading: (state, action: PayloadAction<boolean>) => {

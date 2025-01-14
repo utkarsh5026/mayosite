@@ -1,7 +1,7 @@
 import React from "react";
 import useAnimationPlayground from "@/store/playground/hook";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { Loader2, Play, RefreshCw } from "lucide-react";
 
 const Preview: React.FC = () => {
   const { elementRef, animate, reset, loading } = useAnimationPlayground();
@@ -37,7 +37,10 @@ const Preview: React.FC = () => {
               Playing...
             </>
           ) : (
-            "Play Animation"
+            <>
+              <Play className="mr-2 h-4 w-4" />
+              Play Animation
+            </>
           )}
         </Button>
         <Button
@@ -46,6 +49,7 @@ const Preview: React.FC = () => {
           onClick={() => reset()}
           disabled={loading}
         >
+          <RefreshCw className="mr-2 h-4 w-4" />
           Reset
         </Button>
       </div>
