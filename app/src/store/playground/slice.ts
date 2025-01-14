@@ -28,7 +28,7 @@ export const animationSlice = createSlice({
       if (value === undefined) {
         delete state.config[key];
       } else {
-        state.config[key] = value as any;
+        state.config[key] = value;
       }
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
@@ -37,11 +37,19 @@ export const animationSlice = createSlice({
     setError: (state, action: PayloadAction<string | null>) => {
       state.error = action.payload;
     },
+    resetAnimationConfig: (state) => {
+      state.config = {};
+      state.error = null;
+    },
   },
 });
 
-export const { setAnimationConfig, setLoading, setError } =
-  animationSlice.actions;
+export const {
+  setAnimationConfig,
+  setLoading,
+  setError,
+  resetAnimationConfig,
+} = animationSlice.actions;
 
 export const selectAnimationConfig = (state: { animation: AnimationState }) =>
   state.animation.config;

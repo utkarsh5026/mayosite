@@ -1,10 +1,10 @@
 import React from "react";
 import useAnimationPlayground from "@/store/playground/hook";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 
 const Preview: React.FC = () => {
-  const { elementRef, animate, animationConfig } = useAnimationPlayground();
-  console.dir(animationConfig, { depth: null });
-
+  const { elementRef, animate, reset, loading } = useAnimationPlayground();
   return (
     <div className="flex flex-col gap-4">
       <div
@@ -25,12 +25,30 @@ const Preview: React.FC = () => {
           }}
         />
       </div>
-      <button
-        className="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-3 rounded-lg transition-colors"
-        onClick={() => animate()}
-      >
-        Play Animation
-      </button>
+      <div className="flex gap-4">
+        <Button
+          className="flex-1 bg-blue-500 text-white hover:bg-blue-600"
+          onClick={() => animate()}
+          disabled={loading}
+        >
+          {loading ? (
+            <>
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Playing...
+            </>
+          ) : (
+            "Play Animation"
+          )}
+        </Button>
+        <Button
+          variant="secondary"
+          className="flex-1"
+          onClick={() => reset()}
+          disabled={loading}
+        >
+          Reset
+        </Button>
+      </div>
     </div>
   );
 };

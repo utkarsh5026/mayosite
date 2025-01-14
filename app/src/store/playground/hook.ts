@@ -9,6 +9,7 @@ import {
   selectAnimationConfig,
   selectAnimationLoading,
   selectAnimationError,
+  resetAnimationConfig,
 } from "./slice";
 import useSettings from "../settings/hook";
 
@@ -39,10 +40,6 @@ const useAnimationPlayground = () => {
 
     try {
       dispatch(setLoading(true));
-      dispatch(setError(null));
-
-      console.log("Starting animation with config:", animationConfig);
-      console.log("settings", settings);
 
       const animation = new Animation(
         elementRef.current,
@@ -54,6 +51,9 @@ const useAnimationPlayground = () => {
         {
           duration: settings.duration,
           easing: settings.ease,
+          onComplete: () => {
+            dispatch(setLoading(false));
+          },
         }
       );
 
@@ -63,8 +63,6 @@ const useAnimationPlayground = () => {
         error instanceof Error ? error.message : "Unknown error occurred";
       dispatch(setError(errorMessage));
       console.error("Animation error:", error);
-    } finally {
-      dispatch(setLoading(false));
     }
   }, [animationConfig, settings, dispatch]);
 
@@ -73,11 +71,17 @@ const useAnimationPlayground = () => {
     animate();
   }, [animate, animationConfig]);
 
+  const reset = useCallback(() => {
+    if (elementRef.current) elementRef.current.style.transform = "";
+    dispatch(resetAnimationConfig());
+  }, [dispatch]);
+
   return {
     elementRef,
     animationConfig,
     handleAnimationConfigChange,
     animate: debugAnimate,
+    reset,
     loading,
     error,
   };
